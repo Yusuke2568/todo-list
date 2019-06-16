@@ -5,11 +5,13 @@ export interface TodoProps {
   body: string;
 }
 
-const Todo: React.FC<TodoProps> = ({ title = '', body = '' }) => (
-  <>
-    {title}
-    {body}
-  </>
-);
+const Todo: React.FC<TodoProps> = ({ title = '', body = '' }) => {
+  return (
+    <>
+      {title}
+      {body}
+    </>
+  );
+};
 
 export default Todo;
