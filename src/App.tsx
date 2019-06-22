@@ -6,6 +6,7 @@ import Todos from './components/Todos';
 import Preview from './components/Preview';
 import TodoModal from './components/TodoModal';
 import EditModal from './components/EditModal';
+import SearchAppBar from './components/SearchAppBar';
 import { TodosState, Todo as ITodo } from './reducer';
 
 const todosSelector = (state: TodosState) => state.todos;
@@ -32,6 +33,7 @@ const App: React.FC = () => {
 
   return (
     <div className="App">
+      <SearchAppBar />
       Todo
       <Todos todos={todos} onclickHo={openEditModal} />
       <Preview />
