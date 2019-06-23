@@ -8,6 +8,7 @@ import TodoModal from './components/TodoModal';
 import EditModal from './components/EditModal';
 import SearchAppBar from './components/SearchAppBar';
 import { TodosState, Todo as ITodo } from './reducer';
+import { add } from './actions/todo';
 
 const todosSelector = (state: TodosState) => state.todos;
 
@@ -31,12 +32,17 @@ const App: React.FC = () => {
     setOpenModal(false);
   };
 
+  const addTodo = (title: string, body: string) => {
+    const id = 5;
+    dispatch(add(id, title, body));
+  };
+
   return (
     <div className="App">
       <SearchAppBar />
       <Todos todos={todos} onclickHo={openEditModal} />
       <Preview />
-      <TodoModal />
+      <TodoModal addTodo={addTodo} />
       <EditModal
         modalIsOpen={modalIsOpen}
         setModalIsClose={setModalIsClose}

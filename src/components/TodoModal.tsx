@@ -13,13 +13,21 @@ interface MyFormValues {
   firstName: string;
 }
 
-const TodoModal: React.FC = () => {
+interface Props {
+  addTodo: (title: string, body: string) => void;
+}
+
+const TodoModal: React.FC<Props> = props => {
   const [modalIsOpen, setOpenModal] = useState(false);
   const openModal = () => {
     setOpenModal(true);
   };
   const closeModal = () => {
     setOpenModal(false);
+  };
+
+  const addTodo = () => {
+    props.addTodo('hoge', 'huga');
   };
 
   const customStyles = {
@@ -73,7 +81,9 @@ const TodoModal: React.FC = () => {
         <button type="button" onClick={closeModal}>
           close
         </button>
-        <button type="button">Create</button>
+        <button type="button" onClick={addTodo}>
+          Create
+        </button>
       </Modal>
     </>
   );
