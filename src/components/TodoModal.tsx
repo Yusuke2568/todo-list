@@ -11,6 +11,8 @@ import {
 
 interface MyFormValues {
   firstName: string;
+  title?: string;
+  body?: string;
 }
 
 interface Props {
@@ -53,12 +55,11 @@ const TodoModal: React.FC<Props> = props => {
         contentLabel="Example Modal"
       >
         <Formik
-          initialValues={{ firstName: '' }}
+          initialValues={{ firstName: '', title: 'タイトル', body: 'ボディ' }}
           onSubmit={(
             values: MyFormValues,
             actions: FormikActions<MyFormValues>,
           ) => {
-            console.log({ values, actions });
             actions.setSubmitting(false);
           }}
           render={(formikBag: FormikProps<MyFormValues>) => (
@@ -74,6 +75,8 @@ const TodoModal: React.FC<Props> = props => {
                   </div>
                 )}
               />
+              <Field type="text" name="title" />
+              <Field type="text" name="body" />
             </Form>
           )}
         />
