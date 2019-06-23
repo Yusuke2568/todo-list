@@ -1,5 +1,17 @@
 import React, { useState } from 'react';
 import Modal from 'react-modal';
+import {
+  Formik,
+  FormikActions,
+  FormikProps,
+  Form,
+  Field,
+  FieldProps,
+} from 'formik';
+
+interface MyFormValues {
+  firstName: string;
+}
 
 const TodoModal: React.FC = () => {
   const [modalIsOpen, setOpenModal] = useState(false);
@@ -24,7 +36,7 @@ const TodoModal: React.FC = () => {
   return (
     <>
       <button type="button" onClick={openModal}>
-        Open Modal
+        Create
       </button>
       <Modal
         isOpen={modalIsOpen}
@@ -32,11 +44,36 @@ const TodoModal: React.FC = () => {
         style={customStyles}
         contentLabel="Example Modal"
       >
-        <h2>Hello</h2>
+        <Formik
+          initialValues={{ firstName: '' }}
+          onSubmit={(
+            values: MyFormValues,
+            actions: FormikActions<MyFormValues>,
+          ) => {
+            console.log({ values, actions });
+            actions.setSubmitting(false);
+          }}
+          render={(formikBag: FormikProps<MyFormValues>) => (
+            <Form>
+              <Field
+                name="firstName"
+                render={({ field, form }: FieldProps<MyFormValues>) => (
+                  <div>
+                    <input type="text" {...field} placeholder="First Name" />
+                    {form.touched.firstName &&
+                      form.errors.firstName &&
+                      form.errors.firstName}
+                  </div>
+                )}
+              />
+            </Form>
+          )}
+        />
+        <h2>Add Todo</h2>
         <button type="button" onClick={closeModal}>
           close
         </button>
-        <div>I am a modal</div>
+        <button type="button">Create</button>
       </Modal>
     </>
   );
