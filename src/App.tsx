@@ -34,7 +34,6 @@ const App: React.FC = () => {
   return (
     <div className="App">
       <SearchAppBar />
-      Todo
       <Todos todos={todos} onclickHo={openEditModal} />
       <Preview />
       <TodoModal />
