@@ -2,6 +2,8 @@ import React, { useState } from 'react';
 import './App.css';
 
 import { useDispatch, useSelector } from 'react-redux';
+import { Container } from '@material-ui/core';
+import styled from 'styled-components';
 import Todos from './components/Todos';
 import Preview from './components/Preview';
 import TodoModal from './components/TodoModal';
@@ -18,6 +20,7 @@ const App: React.FC = () => {
 
   const [modalIsOpen, setOpenModal] = useState(false);
   const [editTodo, setEditTodo] = useState<ITodo | null>(null);
+  const [previewTodo, setPreviewTodo] = useState<ITodo | null>(null);
 
   const openEditModal = (todo: ITodo) => {
     setEditTodo(todo);
@@ -40,9 +43,13 @@ const App: React.FC = () => {
   return (
     <div className="App">
       <SearchAppBar />
-      <Todos todos={todos} onclickHo={openEditModal} />
-      <Preview />
-      <TodoModal addTodo={addTodo} />
+      <BodyContainer>
+        <div>
+          <Todos todos={todos} onclickHo={openEditModal} />
+          <TodoModal addTodo={addTodo} />
+        </div>
+        <Preview previewTodo={previewTodo} />
+      </BodyContainer>
       <EditModal
         modalIsOpen={modalIsOpen}
         setModalIsClose={setModalIsClose}
@@ -51,5 +58,9 @@ const App: React.FC = () => {
     </div>
   );
 };
+
+const BodyContainer = styled.div`
+  display: flex;
+`;
 
 export default App;
