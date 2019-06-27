@@ -11,6 +11,7 @@ interface Props {
   modalIsOpen: boolean;
   setModalIsClose: () => void;
   editTodo: ITodo | null;
+  updateTodo: (todo: ITodo) => void;
 }
 
 interface MyFormValues {
@@ -55,6 +56,7 @@ const EditModal: React.FC<Props> = ({
   modalIsOpen,
   setModalIsClose,
   editTodo,
+  updateTodo,
 }) => {
   const classes = useStyles();
 
@@ -82,8 +84,8 @@ const EditModal: React.FC<Props> = ({
             values: MyFormValues,
             actions: FormikActions<MyFormValues>,
           ) => {
-            // update用のactionを投げる
-            console.log(values);
+            updateTodo(values);
+            setModalIsClose();
           }}
           render={(Props: FormikProps<MyFormValues>) => (
             <Form>

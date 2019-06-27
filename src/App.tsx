@@ -15,7 +15,7 @@ import EditModal from './components/EditModal';
 import SearchAppBar from './components/SearchAppBar';
 
 // actions & reducer
-import { add } from './actions/todo';
+import { add, update } from './actions/todo';
 import { TodosState, Todo as ITodo } from './reducer';
 
 const todosSelector = (state: TodosState) => state.todos;
@@ -45,6 +45,10 @@ const App: React.FC = () => {
     dispatch(add(title, body, deadline));
   };
 
+  const updateTodo = (todo: ITodo) => {
+    dispatch(update(todo.id, todo.title, todo.body, todo.check, todo.deadline));
+  };
+
   const setPreview = (todo: ITodo) => {
     setPreviewTodo(todo);
   };
@@ -67,6 +71,7 @@ const App: React.FC = () => {
         modalIsOpen={modalIsOpen}
         setModalIsClose={setModalIsClose}
         editTodo={editTodo}
+        updateTodo={updateTodo}
       />
     </div>
   );

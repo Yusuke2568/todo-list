@@ -1,5 +1,5 @@
 import { Reducer } from 'redux';
-import { TodoAction, ADD } from './actions/todo';
+import { TodoAction, ADD, UPDATE } from './actions/todo';
 
 export interface Todo {
   id: number;
@@ -50,6 +50,16 @@ const TodosReducer: Reducer<TodosState, TodoAction> = (
       return {
         ...state,
         todos: state.todos.concat(NewTodo),
+      };
+    }
+    case UPDATE: {
+      const UpdatedTodos = state.todos.map(el =>
+        el.id === action.payload.id ? action.payload : el,
+      );
+
+      return {
+        ...state,
+        todos: UpdatedTodos,
       };
     }
     default:
