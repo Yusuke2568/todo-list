@@ -52,6 +52,8 @@ const TodoModal: React.FC<Props> = props => {
       bottom: 'auto',
       marginRight: '-50%',
       transform: 'translate(-50%, -50%)',
+      height: '400px',
+      width: '400px',
     },
   };
 
