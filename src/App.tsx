@@ -41,14 +41,8 @@ const App: React.FC = () => {
     setOpenModal(false);
   };
 
-  const addTodo = (
-    id: number,
-    title: string,
-    body: string,
-    check: boolean,
-    deadline: string,
-  ) => {
-    dispatch(add(id, title, body, check, deadline));
+  const addTodo = (title: string, body: string, deadline: string) => {
+    dispatch(add(title, body, deadline));
   };
 
   return (

@@ -38,9 +38,18 @@ const TodosReducer: Reducer<TodosState, TodoAction> = (
 ): TodosState => {
   switch (action.type) {
     case ADD: {
+      const NextId = state.todos.length;
+      const NewTodo: Todo = {
+        id: NextId,
+        title: action.payload.title,
+        body: action.payload.body,
+        check: false,
+        deadline: '2019-12-12',
+      };
+
       return {
         ...state,
-        todos: state.todos.concat(action.payload),
+        todos: state.todos.concat(NewTodo),
       };
     }
     default:

@@ -68,9 +68,8 @@ const AlignItemsList: React.FC<Props> = ({ todos, onclickHo }) => {
                     className={classes.inline}
                     color="textPrimary"
                   >
-                    Ali Connors
+                    {todo.body}
                   </Typography>
-                  {todo.body}
                 </>
               }
             />

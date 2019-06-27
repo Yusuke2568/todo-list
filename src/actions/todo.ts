@@ -1,18 +1,10 @@
 export const ADD = 'ADD';
 
-export const add = (
-  id: number,
-  title: string,
-  body: string,
-  check: boolean,
-  deadline: string,
-) => ({
+export const add = (title: string, body: string, deadline: string) => ({
   type: ADD as typeof ADD,
   payload: {
-    id,
     title,
     body,
-    check,
     deadline,
   },
 });
