@@ -1,16 +1,22 @@
 import React, { useState } from 'react';
-import './App.css';
 
-import { useDispatch, useSelector } from 'react-redux';
-import { Container } from '@material-ui/core';
+// style
+import './App.css';
 import styled from 'styled-components';
-import Todos from './components/Todos';
+
+// for state
+import { useDispatch, useSelector } from 'react-redux';
+
+// components
+import AlignItemsList from './components/AlignItemsList';
 import Preview from './components/Preview';
 import TodoModal from './components/TodoModal';
 import EditModal from './components/EditModal';
 import SearchAppBar from './components/SearchAppBar';
-import { TodosState, Todo as ITodo } from './reducer';
+
+// actions & reducer
 import { add } from './actions/todo';
+import { TodosState, Todo as ITodo } from './reducer';
 
 const todosSelector = (state: TodosState) => state.todos;
 
@@ -35,19 +41,24 @@ const App: React.FC = () => {
     setOpenModal(false);
   };
 
-  const addTodo = (title: string, body: string) => {
-    const id = 5;
-    dispatch(add(id, title, body));
+  const addTodo = (
+    id: number,
+    title: string,
+    body: string,
+    check: boolean,
+    deadline: string,
+  ) => {
+    dispatch(add(id, title, body, check, deadline));
   };
 
   return (
     <div className="App">
       <SearchAppBar />
       <BodyContainer>
-        <div>
-          <Todos todos={todos} onclickHo={openEditModal} />
+        <TodoWrapper>
+          <AlignItemsList todos={todos} onclickHo={openEditModal} />
           <TodoModal addTodo={addTodo} />
-        </div>
+        </TodoWrapper>
         <Preview previewTodo={previewTodo} />
       </BodyContainer>
       <EditModal
@@ -61,6 +72,10 @@ const App: React.FC = () => {
 
 const BodyContainer = styled.div`
   display: flex;
+`;
+
+const TodoWrapper = styled.div`
+  flex: 1;
 `;
 
 export default App;

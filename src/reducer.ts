@@ -5,6 +5,8 @@ export interface Todo {
   id: number;
   title: string;
   body: string;
+  check: boolean;
+  deadline: string;
 }
 
 export interface TodosState {
@@ -17,11 +19,15 @@ export const initialState: TodosState = {
       id: 1,
       title: 'title-1',
       body: 'body-1',
+      check: false,
+      deadline: '2019-12-12',
     },
     {
       id: 2,
       title: 'title-2',
       body: 'body-2',
+      check: false,
+      deadline: '2019-12-12',
     },
   ],
 };

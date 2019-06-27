@@ -1,23 +1,33 @@
 import React, { useState } from 'react';
+import { createStyles, Theme, makeStyles } from '@material-ui/core/styles';
 import Modal from 'react-modal';
-import {
-  Formik,
-  FormikActions,
-  FormikProps,
-  Form,
-  Field,
-  FieldProps,
-} from 'formik';
+import Fab from '@material-ui/core/Fab';
+import AddIcon from '@material-ui/icons/Add';
+import { Formik, FormikActions, FormikProps, Form, Field } from 'formik';
+import TodoSchema from '../schema/todo_schema';
 
 interface MyFormValues {
-  firstName: string;
   title?: string;
   body?: string;
 }
 
 interface Props {
-  addTodo: (title: string, body: string) => void;
+  addTodo: (
+    id: number,
+    title: string,
+    body: string,
+    check: boolean,
+    deadline: string,
+  ) => void;
 }
+
+const useStyles = makeStyles((theme: Theme) =>
+  createStyles({
+    margin: {
+      margin: theme.spacing(1),
+    },
+  }),
+);
 
 const TodoModal: React.FC<Props> = props => {
   const [modalIsOpen, setOpenModal] = useState(false);
@@ -29,8 +39,10 @@ const TodoModal: React.FC<Props> = props => {
   };
 
   const addTodo = () => {
-    props.addTodo('hoge', 'huga');
+    props.addTodo(1, 'hoge', 'huga', true, '2019-12-12');
   };
+
+  const classes = useStyles();
 
   const customStyles = {
     content: {
@@ -45,42 +57,47 @@ const TodoModal: React.FC<Props> = props => {
 
   return (
     <>
-      <button type="button" onClick={openModal}>
-        Create
-      </button>
+      <Fab
+        size="small"
+        color="secondary"
+        aria-label="Add"
+        className={classes.margin}
+        onClick={openModal}
+      >
+        <AddIcon />
+      </Fab>
       <Modal
         isOpen={modalIsOpen}
         onRequestClose={closeModal}
         style={customStyles}
         contentLabel="Example Modal"
       >
+        <h3>Create Todo</h3>
         <Formik
-          initialValues={{ firstName: '', title: 'タイトル', body: 'ボディ' }}
+          initialValues={{ title: 'タイトル', body: 'ボディ' }}
+          validationSchema={TodoSchema}
           onSubmit={(
             values: MyFormValues,
             actions: FormikActions<MyFormValues>,
           ) => {
-            actions.setSubmitting(false);
+            // actions.setSubmitting(false);
           }}
-          render={(formikBag: FormikProps<MyFormValues>) => (
+          render={(Props: FormikProps<MyFormValues>) => (
             <Form>
-              <Field
-                name="firstName"
-                render={({ field, form }: FieldProps<MyFormValues>) => (
-                  <div>
-                    <input type="text" {...field} placeholder="First Name" />
-                    {form.touched.firstName &&
-                      form.errors.firstName &&
-                      form.errors.firstName}
-                  </div>
-                )}
-              />
               <Field type="text" name="title" />
+              {Props.errors.title && Props.touched.title && (
+                <div>{Props.errors.title}</div>
+              )}
+              <br />
               <Field type="text" name="body" />
+              {Props.errors.body && Props.touched.body && (
+                <div>{Props.errors.body}</div>
+              )}
+              <br />
+              <button type="submit">Submit</button>
             </Form>
           )}
         />
-        <h2>Add Todo</h2>
         <button type="button" onClick={closeModal}>
           close
         </button>

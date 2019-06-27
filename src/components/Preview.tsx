@@ -1,5 +1,12 @@
 import React from 'react';
+
+// style
+import styled from 'styled-components';
+
+// markdown library
 import { Marked } from 'marked-ts';
+
+// reducer
 import { Todo as ITodo } from '../reducer';
 
 interface Props {
@@ -10,7 +17,7 @@ const Preview: React.FC<Props> = ({ previewTodo }) => {
   const previewText = previewTodo ? previewTodo.body : '- こんにちは';
 
   return (
-    <div>
+    <PreviewWrapper>
       <h3>タイトル</h3>
       {previewTodo ? previewTodo.title : null}
       <h4>テキスト</h4>
@@ -19,8 +26,13 @@ const Preview: React.FC<Props> = ({ previewTodo }) => {
           __html: Marked.parse(previewText),
         }}
       ></div>
-    </div>
+    </PreviewWrapper>
   );
 };
+
+const PreviewWrapper = styled.div`
+  flex: 1;
+  text-align: left;
+`;
 
 export default Preview;
