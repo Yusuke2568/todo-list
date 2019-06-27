@@ -45,12 +45,20 @@ const App: React.FC = () => {
     dispatch(add(title, body, deadline));
   };
 
+  const setPreview = (todo: ITodo) => {
+    setPreviewTodo(todo);
+  };
+
   return (
     <div className="App">
       <SearchAppBar />
       <BodyContainer>
         <TodoWrapper>
-          <AlignItemsList todos={todos} onclickHo={openEditModal} />
+          <AlignItemsList
+            todos={todos}
+            onclickHo={openEditModal}
+            setPreview={setPreview}
+          />
           <TodoModal addTodo={addTodo} />
         </TodoWrapper>
         <Preview previewTodo={previewTodo} />

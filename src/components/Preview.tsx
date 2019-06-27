@@ -26,6 +26,8 @@ const Preview: React.FC<Props> = ({ previewTodo }) => {
           __html: Marked.parse(previewText),
         }}
       ></div>
+      <h4>完了状態</h4>
+      {previewTodo && previewTodo.check ? '完了' : '未完了'}
     </PreviewWrapper>
   );
 };

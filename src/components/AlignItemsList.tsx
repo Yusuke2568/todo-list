@@ -19,6 +19,7 @@ import { Todo as ITodo } from '../reducer';
 interface Props {
   todos: ITodo[];
   onclickHo: (todo: ITodo) => void;
+  setPreview: (todo: ITodo) => void;
 }
 
 const useStyles = makeStyles((theme: Theme) =>
@@ -41,14 +42,19 @@ const useStyles = makeStyles((theme: Theme) =>
   }),
 );
 
-const AlignItemsList: React.FC<Props> = ({ todos, onclickHo }) => {
+const AlignItemsList: React.FC<Props> = ({ todos, onclickHo, setPreview }) => {
   const classes = useStyles();
 
   return (
     <List className={classes.root}>
       {todos.map(todo => (
         <>
-          <ListItem alignItems="flex-start">
+          <ListItem
+            alignItems="flex-start"
+            onClick={() => {
+              setPreview(todo);
+            }}
+          >
             <Checkbox
               // checked={state.checkedA}
               // onChange={handleChange('checkedA')}
@@ -68,7 +74,7 @@ const AlignItemsList: React.FC<Props> = ({ todos, onclickHo }) => {
                     className={classes.inline}
                     color="textPrimary"
                   >
-                    {todo.body}
+                    {todo.body.slice(0, 10)}
                   </Typography>
                 </>
               }
