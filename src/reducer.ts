@@ -1,5 +1,6 @@
 import { Reducer } from 'redux';
-import { TodoAction, ADD, UPDATE } from './actions/todo';
+import { TodoAction } from './actions/todo';
+import * as ActionType from './actions/Constants';
 
 export interface Todo {
   id: number;
@@ -37,7 +38,7 @@ const TodosReducer: Reducer<TodosState, TodoAction> = (
   action: TodoAction,
 ): TodosState => {
   switch (action.type) {
-    case ADD: {
+    case ActionType.ADD: {
       const NextId = state.todos.length;
       const NewTodo: Todo = {
         id: NextId,
@@ -52,7 +53,7 @@ const TodosReducer: Reducer<TodosState, TodoAction> = (
         todos: state.todos.concat(NewTodo),
       };
     }
-    case UPDATE: {
+    case ActionType.UPDATE: {
       const UpdatedTodos = state.todos.map(el =>
         el.id === action.payload.id ? action.payload : el,
       );
@@ -60,6 +61,14 @@ const TodosReducer: Reducer<TodosState, TodoAction> = (
       return {
         ...state,
         todos: UpdatedTodos,
+      };
+    }
+    case ActionType.SUCCESS: {
+      console.log('成功した');
+
+      return {
+        ...state,
+        todos: state.todos,
       };
     }
     default:

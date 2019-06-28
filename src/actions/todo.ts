@@ -1,8 +1,7 @@
-export const ADD = 'ADD';
-export const UPDATE = 'UPDATE';
+import * as ActionType from './Constants';
 
 export const add = (title: string, body: string, deadline: string) => ({
-  type: ADD as typeof ADD,
+  type: ActionType.ADD as typeof ActionType.ADD,
   payload: {
     title,
     body,
@@ -17,7 +16,7 @@ export const update = (
   check: boolean,
   deadline: string,
 ) => ({
-  type: UPDATE as typeof UPDATE,
+  type: ActionType.UPDATE as typeof ActionType.UPDATE,
   payload: {
     id,
     title,
@@ -27,4 +26,14 @@ export const update = (
   },
 });
 
-export type TodoAction = ReturnType<typeof add> | ReturnType<typeof update>;
+export const success = (result: string) => ({
+  type: ActionType.SUCCESS as typeof ActionType.SUCCESS,
+  payload: {
+    result,
+  },
+});
+
+export type TodoAction =
+  | ReturnType<typeof add>
+  | ReturnType<typeof update>
+  | ReturnType<typeof success>;
