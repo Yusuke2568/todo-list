@@ -3,18 +3,25 @@ import ReactDOM from 'react-dom';
 import './index.css';
 
 import { Provider } from 'react-redux';
-import { createStore } from 'redux';
+import { PersistGate } from 'redux-persist/integration/react';
 
 import App from './App';
 import * as serviceWorker from './serviceWorker';
 
-import TodosReducer from './reducer';
+// redux-persist を使って、store をlocalstorageで管理する様にする
+// だからここでは reducer を importしない
+// import TodosReducer from './reducer';
+// import { createStore } from 'redux';
+import store, { persistor } from './configureStore';
 
-const store = createStore(TodosReducer);
+// redux-persist でlocalstorageに保存した store を使うため、ここでcreateStoreはしない
+// const store = createStore(TodosReducer);
 
 ReactDOM.render(
   <Provider store={store}>
-    <App />
+    <PersistGate loading={null} persistor={persistor}>
+      <App />
+    </PersistGate>
   </Provider>,
   document.getElementById('root'),
 );
