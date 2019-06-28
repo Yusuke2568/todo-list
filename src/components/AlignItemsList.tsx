@@ -20,6 +20,7 @@ interface Props {
   todos: ITodo[];
   onclickHo: (todo: ITodo) => void;
   setPreview: (todo: ITodo) => void;
+  destroyTodo: (id: number) => void;
 }
 
 const useStyles = makeStyles((theme: Theme) =>
@@ -42,7 +43,12 @@ const useStyles = makeStyles((theme: Theme) =>
   }),
 );
 
-const AlignItemsList: React.FC<Props> = ({ todos, onclickHo, setPreview }) => {
+const AlignItemsList: React.FC<Props> = ({
+  todos,
+  onclickHo,
+  setPreview,
+  destroyTodo,
+}) => {
   const classes = useStyles();
 
   return (
@@ -90,7 +96,13 @@ const AlignItemsList: React.FC<Props> = ({ todos, onclickHo, setPreview }) => {
             >
               Edit
             </Button>
-            <IconButton aria-label="Delete" className={classes.margin}>
+            <IconButton
+              aria-label="Delete"
+              className={classes.margin}
+              onClick={() => {
+                destroyTodo(todo.id);
+              }}
+            >
               <DeleteIcon fontSize="small" />
             </IconButton>
           </ListItem>

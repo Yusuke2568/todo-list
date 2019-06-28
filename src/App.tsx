@@ -15,7 +15,7 @@ import EditModal from './components/EditModal';
 import SearchAppBar from './components/SearchAppBar';
 
 // actions & reducer
-import { add, update } from './actions/todo';
+import { add, update, destroy } from './actions/todo';
 import { TodosState, Todo as ITodo } from './reducer';
 
 const todosSelector = (state: TodosState) => state.todos;
@@ -49,6 +49,10 @@ const App: React.FC = () => {
     dispatch(update(todo.id, todo.title, todo.body, todo.check, todo.deadline));
   };
 
+  const destroyTodo = (id: number) => {
+    dispatch(destroy(id));
+  };
+
   const setPreview = (todo: ITodo) => {
     setPreviewTodo(todo);
   };
@@ -62,6 +66,7 @@ const App: React.FC = () => {
             todos={todos}
             onclickHo={openEditModal}
             setPreview={setPreview}
+            destroyTodo={destroyTodo}
           />
           <TodoModal addTodo={addTodo} />
         </TodoWrapper>
