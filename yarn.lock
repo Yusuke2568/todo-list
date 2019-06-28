@@ -1620,6 +1620,11 @@
     "@types/react-native" "*"
     csstype "^2.2.0"
 
+"@types/underscore@^1.9.1":
+  version "1.9.1"
+  resolved "https://registry.yarnpkg.com/@types/underscore/-/underscore-1.9.1.tgz#be305f4bef84eb382d7cfba7665636c82e5a2939"
+  integrity sha512-ROHiJBeuXxVVaKm65tM/LHWlkcTFBQJqJgDB90Vj3fsl8Q290Z29cmEwnpvtlb0nSzuMIaIYWj0ZvmVgim8khA==
+
 "@types/unist@*", "@types/unist@^2.0.0", "@types/unist@^2.0.2":
   version "2.0.3"
   resolved "https://registry.yarnpkg.com/@types/unist/-/unist-2.0.3.tgz#9c088679876f374eb5983f150d4787aa6fb32d7e"
@@ -12052,6 +12057,11 @@ uglify-js@^3.1.4:
   dependencies:
     commander "~2.20.0"
     source-map "~0.6.1"
+
+underscore@^1.9.1:
+  version "1.9.1"
+  resolved "https://registry.yarnpkg.com/underscore/-/underscore-1.9.1.tgz#06dce34a0e68a7babc29b365b8e74b8925203961"
+  integrity sha512-5/4etnCkd9c8gwgowi5/om/mYO5ajCaOgdzj/oW+0eQV9WxKBDZw5+ycmKmeaTXjInS/W0BzpGLo2xR2aBwZdg==
 
 unherit@^1.0.4:
   version "1.1.2"
