@@ -1,7 +1,7 @@
-import * as ActionType from './Constants';
+import * as Action from './Constants';
 
 export const add = (title: string, body: string, deadline: string) => ({
-  type: ActionType.ADD as typeof ActionType.ADD,
+  type: Action.ADD as typeof Action.ADD,
   payload: {
     title,
     body,
@@ -16,7 +16,7 @@ export const update = (
   check: boolean,
   deadline: string,
 ) => ({
-  type: ActionType.UPDATE as typeof ActionType.UPDATE,
+  type: Action.UPDATE as typeof Action.UPDATE,
   payload: {
     id,
     title,
@@ -26,8 +26,15 @@ export const update = (
   },
 });
 
+export const destroy = (id: number) => ({
+  type: Action.DESTROY as typeof Action.DESTROY,
+  payload: {
+    id,
+  },
+});
+
 export const success = (result: string) => ({
-  type: ActionType.SUCCESS as typeof ActionType.SUCCESS,
+  type: Action.SUCCESS as typeof Action.SUCCESS,
   payload: {
     result,
   },
@@ -36,4 +43,5 @@ export const success = (result: string) => ({
 export type TodoAction =
   | ReturnType<typeof add>
   | ReturnType<typeof update>
+  | ReturnType<typeof destroy>
   | ReturnType<typeof success>;
